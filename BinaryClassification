@@ -3,6 +3,16 @@
     {
       "cell_type": "markdown",
       "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Djinho/Project_CNN/blob/main/BinaryClassification\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
         "id": "Zy481knYabUn"
       },
       "source": [
@@ -44,10 +54,10 @@
     {
       "cell_type": "code",
       "source": [
-        "#clone the repo\n",
-        "!git clone https://github.com/mfumagalli/ImaGene.git\n",
-        "%cd ImaGene/Tutorials\n",
-        "!pwd\n"
+        "!git clone https://github.com/Djinho/Project_CNN.git\n",
+        "# Changing directory to 'BinaryClassification' within the cloned repo\n",
+        "%cd Project_CNN/BinaryClassification\n",
+        "!pwd"
       ],
       "metadata": {
         "id": "vNzbpgtyai7j"
@@ -70,6 +80,11 @@
         "import numpy as np\n",
         "import scipy.stats\n",
         "import arviz\n",
+        "\n",
+        "import tensorflow as tf\n",
+        "from tensorflow.keras import models, layers, regularizers\n",
+        "from tensorflow.python.profiler.model_analyzer import profile\n",
+        "from tensorflow.python.profiler.option_builder import ProfileOptionBuilder\n",
         "\n",
         "import tensorflow as tf\n",
         "from tensorflow import keras\n",
@@ -145,7 +160,7 @@
       },
       "outputs": [],
       "source": [
-        "file_LCT = ImaFile(nr_samples=198, VCF_file_name='LCT.CEU.vcf')"
+        "file_LCT = ImaFile(nr_samples=198, VCF_file_name='../LCT.CEU.vcf')\n"
       ]
     },
     {
@@ -410,9 +425,6 @@
       },
       "outputs": [],
       "source": [
-        "# set as appropriate, e.g.:\n",
-        "# path_sim='/home/mfumagal/Data/ImaGene/Tutorials/' # my local machine\n",
-        "# path_sim='/mnt/quobyte/ImaGene/' # for workshop spp1819\n",
         "path_sim = './'"
       ]
     },
@@ -705,29 +717,25 @@
         "                    layers.MaxPooling2D(pool_size=(2,2)),\n",
         "                    layers.Flatten(),\n",
         "                    layers.Dense(units=128, activation='relu'),\n",
-        "                    layers.Dense(units=1, activation='sigmoid')])"
-      ]
-    },
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "LjaKOZWpabUz"
-      },
-      "source": [
-        "Then, let's compile our _keras_ model."
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": null,
-      "metadata": {
-        "id": "av90uB87abUz"
-      },
-      "outputs": [],
-      "source": [
+        "                    layers.Dense(units=1, activation='sigmoid')])\n",
+        "\n",
+        "\n",
+        "# Compile your model\n",
         "model.compile(optimizer='rmsprop',\n",
         "              loss='binary_crossentropy',\n",
-        "              metrics=['accuracy'])"
+        "              metrics=['accuracy'])\n",
+        "\n",
+        "def get_flops(model):\n",
+        "    forward_pass = tf.function(model.call, input_signature=[tf.TensorSpec(shape=(1,) + model.input_shape[1:])])\n",
+        "    graph_info = profile(forward_pass.get_concrete_function().graph, options=ProfileOptionBuilder.float_operation())\n",
+        "    flops = graph_info.total_float_ops  # Corrected attribute name\n",
+        "    return flops\n",
+        "\n",
+        "# Calculate FLOPs and MACs\n",
+        "flops = get_flops(model)\n",
+        "macs = flops / 2\n",
+        "print(f\"MACs: {macs:,} (Multiply-Accumulate Operations)\")\n",
+        "print(f\"FLOPs: {flops:,} (Floating Point Operations)\")"
       ]
     },
     {
@@ -819,15 +827,6 @@
       "source": [
         "net_LCT.update_scores(score);"
       ]
-    },
-    {
-      "cell_type": "code",
-      "source": [],
-      "metadata": {
-        "id": "V3ort1GFdNgT"
-      },
-      "execution_count": null,
-      "outputs": []
     },
     {
       "cell_type": "markdown",
@@ -1067,7 +1066,8 @@
       "version": "3.10.4"
     },
     "colab": {
-      "provenance": []
+      "provenance": [],
+      "include_colab_link": true
     }
   },
   "nbformat": 4,
