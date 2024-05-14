@@ -1,1 +1,22 @@
+### 1) DIRECTORIES
+DIRMSMS="/home/mfumagal/Software/msms/lib/msms.jar"
+DIRDATA="/home/mfumagal/Data/ImaGene/Tutorials/Binary"
 
+### 2) DEMOGRAPHIC MODEL
+NREF=10000
+DEMO='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2'
+
+### 3) LOCUS AND SAMPLE SIZE
+LEN=80000
+THETA=48
+RHO=32
+NCHROMS=198
+
+### 4) SELECTION
+SELPOS=0.5
+FREQ=0.01
+SELRANGE=`seq 0 200 200`
+NREPL=1000
+TIMERANGE=0.1
+NBATCH=10
+NTHREADS=4
