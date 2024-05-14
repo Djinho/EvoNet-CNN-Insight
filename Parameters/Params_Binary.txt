@@ -1,0 +1,57 @@
+### 1) DIRECTORIES
+
+# Path to the msms.jar file; replace with the actual path where msms.jar is located on your system.
+DIRMSMS="/home/mfumagal/Software/msms/lib/msms.jar" 
+
+# Path to the directory where the generated data will be stored; replace with your desired data storage path.
+DIRDATA="/home/mfumagal/Data/ImaGene/Tutorials/Binary" 
+
+### 2) DEMOGRAPHIC MODEL
+
+# Reference effective population size (Ne). This is a key parameter in population genetics simulations.
+NREF=10000 
+
+# Demographic model in ms format which specifies population size changes over time.
+# These commands indicate the population size change events:
+# -eN t1 1: At time t1, population size becomes 1 (relative to Ne).
+# -eN t2 0.2: At time t2, population size becomes 0.2 (relative to Ne).
+# -eN t3 2: At time t3 (which is 0 in this case, meaning the present), population size becomes 2 (relative to Ne).
+DEMO='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2'
+
+### 3) LOCUS AND SAMPLE SIZE
+
+# Length of the locus (genomic region) in base pairs (bp). This value should reflect the region you are simulating.
+LEN=80000 
+
+# Mutation rate (θ) scaled by 4*Ne*LEN. For example, 48 corresponds to a mutation rate assuming Ne=10,000 and locus length=80,000 bp.
+THETA=48 
+
+# Recombination rate (ρ) scaled by 4*Ne*r*(LEN-1). For example, 32 corresponds to a recombination rate assuming Ne=10,000 and locus length=80,000 bp.
+RHO=32 
+
+# Number of chromosomal copies to simulate. Typically, this would be twice the number of individuals for diploid organisms.
+NCHROMS=198 
+
+### 4) SELECTION
+
+# Relative position of the selected allele in the sequence (0.5 means the middle of the sequence).
+SELPOS=`bc <<< 'scale=2; 1/2'` 
+
+# Initial frequency of the selected allele at the start of selection.
+FREQ=`bc <<< 'scale=6; 1/100'` 
+
+# Generate a sequence of selection coefficients (SELRANGE) from 0 to 300 in steps of 300.
+SELRANGE=`seq 0 300 300`
+
+# Number of replicates (simulations) per value of the parameter to be estimated.
+NREPL=1000 
+
+# Selection time. Here, it is scaled to coalescent units (e.g., generations divided by 4 times Ne).
+# The example calculates the scaled selection time as (800 / 40000).
+TIMERANGE=`bc <<< 'scale=4; 800/40000'` 
+
+# Number of batches for each simulation. This can be used to parallelize the simulations or break them into smaller groups.
+NBATCH=10 
+
+# Number of threads to use for parallel processing. Adjust this based on the number of CPU cores available.
+NTHREADS=4 
