@@ -1,0 +1,52 @@
+### 1) DIRECTORIES
+
+# Path to the msms.jar file
+DIRMSMS="/content/EvoNet-CNN-Insight/msms.jar"
+
+# Path to the directory where the generated data will be stored
+DIRDATA="/content/EvoNet-CNN-Insight/Datasets/Early_Weak"
+
+### 2) DEMOGRAPHIC MODEL
+
+# Reference effective population size (Ne)
+NREF=10000
+
+# Demographic model in ms format, specifying population size changes over time
+DEMO='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2'
+
+### 3) LOCUS AND SAMPLE SIZE
+
+# Length of the locus (genomic region) in base pairs (bp)
+LEN=80000
+
+# Mutation rate (theta) scaled by 4*Ne*LEN
+THETA=48
+
+# Recombination rate (rho) scaled by 4*Ne*r*(LEN-1)
+RHO=32
+
+# Number of chromosomal copies to simulate. For diploid organisms, this is typically twice the number of individuals
+NCHROMS=198
+
+### 4) SELECTION
+
+# Relative position of the selected allele in the sequence (0.5 means the middle of the sequence)
+SELPOS=0.5
+
+# Initial frequency of the selected allele at the start of selection
+FREQ=0.01
+
+# Range of selection coefficients (selection strength), here we simulate weak selection scenarios (0 or 100)
+SELRANGE=`seq 0 100 100`
+
+# Number of replicates (simulations) per value of the parameter to be estimated
+NREPL=1000
+
+# Selection time scaled to coalescent units. Here it represents early selection (10kya)
+TIMERANGE=0.01
+
+# Number of batches for each simulation
+NBATCH=10
+
+# Number of threads to use for parallel processing
+NTHREADS=4
