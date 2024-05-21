@@ -12,6 +12,6 @@ for seed_idx in $(seq 0 $((num_runs-1))); do
   seed=${seeds[seed_idx]}
   
   for dataset in "${datasets[@]}"; do
-    qsub job_script.sh "Datasets/${dataset}" ${seed} "./Baseline_Experiments/Results"
+    qsub -v DATASET="Datasets/${dataset}",SEED=${seed},OUTPUT_DIR="./Baseline_Experiments/Results" job_script.sh
   done
 done
