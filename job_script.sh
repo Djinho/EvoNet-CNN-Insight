@@ -4,8 +4,11 @@
 #$ -l h_rt=2:0:0  # Request 2 hours runtime (adjust as needed)
 #$ -l h_vmem=4G  # Request 4GB RAM per core, total 16GB
 
-# Load the Python module
+# Load the Python module and ensure the correct environment
 module load python/3.8
 
+# Check TensorFlow installation
+python -c "import tensorflow as tf; print('TensorFlow Version:', tf.__version__)"
+
 # Run the experiment script
-python run_experiment.py --dataset $1 --seed $2 --output_dir "./Baseline_Experiments/Results"
+python run_experiment.py --dataset $DATASET --seed $SEED --output_dir $OUTPUT_DIR
