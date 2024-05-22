@@ -1,93 +1,84 @@
 # EvoNet-CNN-Insight
-Dataset Generation
 
-This section guides you through generating the datasets required for training models using the EvoNet-CNN-Insight framework. The datasets simulate various evolutionary scenarios and selection strengths.
-Prerequisites
+Generating Data
+Overview
+The generation of synthetic datasets is pivotal for evaluating and validating machine learning models, particularly Convolutional Neural Networks (CNNs) applied to bioinformatics. This section describes the high-level methodology and parameters used to create realistic genomic datasets, reflecting diverse evolutionary scenarios.
 
-Ensure Java is installed on your system to run msms.jar.
-Directory Structure
+Simulation Environment
+All simulations are conducted using the msms toolkit, a robust coalescent simulation software that accommodates both neutral and selective evolutionary pressures. The simulations run within a Google Colab environment, leveraging its computational resources for efficient data generation.
 
-The repository should resemble the following structure:
+Configuration and Parameters
+The following configuration parameters ensure a reproducible and controlled simulation environment:
 
-EvoNet-CNN-Insight/
-│
-├── msms.jar
-├── generate_dataset.sh
-├── Dataset_Generation/
-│   ├── Gen_Dataset.ipynb
-│   ├── params_early_weak.txt
-│   ├── params_early_moderate.txt
-│   ├── params_early_strong.txt
-│   ├── params_mid_weak.txt
-│   ├── params_mid_moderate.txt
-│   ├── params_mid_strong.txt
-│   ├── params_late_weak.txt
-│   ├── params_late_moderate.txt
-│   ├── params_late_strong.txt
-└── Datasets/ (generated datasets will be stored here)
+Directories:
 
-Generating the Datasets
+DIRMSMS: The path to the msms.jar executable.
+DIRDATA: The directory where the generated datasets are stored.
+Demographic Model:
 
-    Clone the Repository:
+NREF: Reference population size, set to 10,000 individuals.
+DEMO: Demographic model specifying population size changes over time.
+Locus and Sample Size:
 
-    Clone the EvoNet-CNN-Insight repository into your local environment:
+LEN: Length of each locus, set to 80,000 base pairs.
+THETA: Population mutation rate.
+RHO: Population recombination rate.
+NCHROMS: Number of chromosomes sampled, set to 198.
+Selection Parameters:
+
+SELPOS: Position of selection on the locus, at 50% of the locus length.
+FREQ: Initial allele frequency at the time of selection, set to 1%.
+Variation in Selection Strengths and Timings:
+
+SELRANGE: Range of selection coefficients simulated, producing different strengths of selection.
+TIMERANGE: Different timings of selection onset, representing various evolutionary scenarios.
+Repetition and Parallel Processing:
+
+NREPL: Number of replicates for each scenario, typically set to 1000.
+NBATCH: Number of batches to split the simulations into, enhancing manageability.
+NTHREADS: Number of threads utilized for parallel processing, maximizing computational efficiency.
+Execution Steps
+To generate the datasets, follow these steps:
+
+Clone the Repository:
 
 !git clone https://github.com/Djinho/EvoNet-CNN-Insight.git
+Navigate to the Dataset Generation Directory:
 
-Navigate to the Dataset_Generation Directory:
+%cd EvoNet-CNN-Insight/Dataset_Generation
+Import Required Libraries:
 
-Change the working directory to Dataset_Generation:
+import subprocess
+import numpy as np
+Set a Base Seed for Reproducibility:
 
-%cd /content/EvoNet-CNN-Insight/Dataset_Generation
+base_seed = 42
+np.random.seed(base_seed)
+List of Parameter Files and Scenarios:
 
-Generate the Datasets:
+params_files = [
+    "params_early_weak.txt",
+    "params_early_moderate.txt",
+    "params_early_strong.txt",
+    "params_mid_weak.txt",
+    "params_mid_moderate.txt",
+    "params_mid_strong.txt",
+    "params_late_weak.txt",
+    "params_late_moderate.txt",
+    "params_late_strong.txt",
+]
+Execute the generate_dataset.sh Script:
 
-Use the Gen_Dataset.ipynb notebook to execute the dataset generation scripts. This notebook automates the dataset generation process using generate_dataset.sh and the parameter files.
+for params_file in params_files:
+    # Create a reproducible seed
+    seed = np.random.randint(0, 10000)
+    
+    print(f"Running simulation for {params_file} with seed {seed}")
+    subprocess.call(["bash", "../generate_dataset.sh", params_file, str(seed)])
 
-Open the Gen_Dataset.ipynb notebook and run the cells to generate all datasets. The notebook executes the following main script:
+print("All simulations completed.")
+This code ensures that simulation datasets are generated for each specified parameter file, with reproducibility guaranteed through a base seed.
 
-    import subprocess
-
-    # List of parameter files
-    params_files = [
-        "params_early_weak.txt",
-        "params_early_moderate.txt",
-        "params_early_strong.txt",
-        "params_mid_weak.txt",
-        "params_mid_moderate.txt",
-        "params_mid_strong.txt",
-        "params_late_weak.txt",
-        "params_late_moderate.txt",
-        "params_late_strong.txt",
-    ]
-
-    # Execute the generate_dataset.sh script with each parameter file
-    for params_file in params_files:
-        print(f"Running simulation for {params_file}")
-        subprocess.call(["bash", "../generate_dataset.sh", params_file])
-
-    print("All simulations completed.")
-
-Parameter Files Overview
-
-Parameter files are provided to simulate various evolutionary scenarios and selection strengths. Each parameter file customizes the demographic model, locus size, selection coefficients, and timing.
-
-    Early Selection: Simulates weak, moderate, and strong selection pressures occurring approximately 10,000 years ago.
-        params_early_weak.txt
-        params_early_moderate.txt
-        params_early_strong.txt
-
-    Mid Selection: Simulates weak, moderate, and strong selection pressures occurring approximately 50,000 years ago.
-        params_mid_weak.txt
-        params_mid_moderate.txt
-        params_mid_strong.txt
-
-    Late Selection: Simulates weak, moderate, and strong selection pressures occurring approximately 100,000 years ago.
-        params_late_weak.txt
-        params_late_moderate.txt
-        params_late_strong.txt
-
-Each parameter file sets the simulation configurations, storing the generated data in the Datasets directory under folders named by the scenario (e.g., Datasets/Early_Weak).
-
-By following this guide, you can successfully generate all required datasets for your models. If you have any questions or need further assistance, please refer to the documentation or contact the repository maintainers.
-
+Conclusion
+This rigorous approach to data generation, integrating advanced simulation tools with a controlled yet flexible parameter setup, ensures that the synthetic datasets produced are both realistic and diverse. These datasets are foundational for training and validating CNN models, advancing the field of evolutionary genomics through robust computational methods.
+ 
