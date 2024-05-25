@@ -4,7 +4,7 @@
 DIRMSMS="/content/EvoNet-CNN-Insight/model_training/msms.jar"
 
 # Path to the directory where the generated data will be stored
-DIRDATA="/content/EvoNet-CNN-Insight/model_training/Early_Weak"
+DIRDATA="/content/EvoNet-CNN-Insight/model_training/EW"
 
 ### 2) DEMOGRAPHIC MODEL
 
