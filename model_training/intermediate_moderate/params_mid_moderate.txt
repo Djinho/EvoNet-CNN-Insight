@@ -1,7 +1,8 @@
 ### 1) DIRECTORIES
 
 DIRMSMS="/content/EvoNet-CNN-Insight/msms.jar"
-DIRDATA="/content/EvoNet-CNN-Insight/Datasets/Mid_Moderate"
+DIRDATA="/content/EvoNet-CNN-Insight/model_training/intermediate_moderate/IM"
+"
 
 ### 2) DEMOGRAPHIC MODEL
 
