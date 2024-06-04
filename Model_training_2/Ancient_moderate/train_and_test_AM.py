@@ -112,7 +112,6 @@ gene_LCT.plot();
 We can do this with _ImaGene_ with the `.sort` method which has the following options.
 """
 
-gene_LCT.sort?
 
 """Assume that we wish to sort only rows by their frequency (with the most frequent haplotypes on the top).
 This can be done with the following command (which will also visualise the resulting image).
@@ -203,7 +202,7 @@ gene_sim.summary();
 
 """All images must have the same dimensions. You can explore all different options for resizing."""
 
-?gene_sim.resize
+
 
 """One possibility would be to resize them to match the dimensions of the real data.
 In this case it means resize all images to have shape (198, 192) which can be achieved with the following command.
