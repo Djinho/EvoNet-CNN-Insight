@@ -30,7 +30,7 @@ In this tutorial, you will learn how to:
 !git clone https://github.com/Djinho/EvoNet-CNN-Insight.git
 
 # Change directories into the specified directory
-# %cd EvoNet-CNN-Insight/model_training/Early_Weak
+# %cd EvoNet-CNN-Insight/Model_training_2/Ancient_moderate
 
 """Before starting, we need to load the necessary modules in _python_ ..."""
 
@@ -163,7 +163,7 @@ After we specify the directories for _msms_ and the folder where all the simulat
 
 # if you wish to generate new training data, do not run otherwise
 import subprocess
-subprocess.call("bash ../generate_dataset.sh params_binary.txt".split());
+subprocess.call("bash ../generate_dataset.sh params_ANC_moderate.txt".split());
 
 """Let's perform the first iteration of training.
 To do that, we need to read the first batch of simulations in `[..]/Binary/Simulations1`and store them into an _ImaFile_ object.
@@ -174,13 +174,13 @@ To do that, we need to read the first batch of simulations in `[..]/Binary/Simul
 # path_sim='/mnt/quobyte/ImaGene/' # for workshop spp1819
 path_sim = './'
 
-file_sim = ImaFile(simulations_folder=path_sim + 'Binary/Simulations1', nr_samples=198, model_name='Marth-3epoch-CEU');
+file_sim = ImaFile(simulations_folder=path_sim + 'AM/Simulations1', nr_samples=198, model_name='Marth-3epoch-CEU');
 
 """Then, we populate an _ImaGene_ object by specifying the variable we want to estimate/predict (`selection_coeff_hetero`) and how many data points per class we wish to retain.
 As a quick example, we will use only 2000 data points per class.
 """
 
-gene_sim = file_sim.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000);
+gene_sim = file_sim.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=4000);
 
 """We can have a look at the data stored in this object."""
 
@@ -298,7 +298,7 @@ i = 2
 while i < 10:
     print(i)
 
-    file_sim = ImaFile(simulations_folder=path_sim + 'Binary/Simulations' + str(i), nr_samples=198, model_name='Marth-3epoch-CEU')
+    file_sim = ImaFile(simulations_folder=path_sim + 'AM/Simulations' + str(i), nr_samples=198, model_name='Marth-3epoch-CEU')
     gene_sim = file_sim.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
 
     gene_sim.filter_freq(0.01)
@@ -344,7 +344,7 @@ net_LCT = load_imanet(path + 'net_LCT.binary')
 """Finally, we evaluate the training on the testing dataset, i.e. the last batch of simulated data."""
 
 i = 10
-file_sim = ImaFile(simulations_folder=path_sim + 'Binary/Simulations' + str(i), nr_samples=198, model_name='Marth-3epoch-CEU')
+file_sim = ImaFile(simulations_folder=path_sim + 'AM/Simulations' + str(i), nr_samples=198, model_name='Marth-3epoch-CEU')
 gene_sim_test = file_sim.read_simulations(parameter_name='selection_coeff_hetero', max_nrepl=2000)
 
 gene_sim_test.filter_freq(0.01)
