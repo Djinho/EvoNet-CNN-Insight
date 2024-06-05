@@ -25,7 +25,7 @@ SELRANGE=`seq 0 200 200`
 
 NREPL=2000
 
-# Represents late selection (100kya)
+# Represents Anceint selection (100kya)
 TIMERANGE=0.100
 
 NBATCH=10
