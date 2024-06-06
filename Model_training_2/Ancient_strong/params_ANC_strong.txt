@@ -20,7 +20,7 @@ NCHROMS=198
 SELPOS=0.50
 FREQ=0.010000
 
-# Simulating moderate selection scenarios (0 or 200)
+# Simulating strong selection scenarios (0 or 300)
 SELRANGE=`seq 0 300 300`
 
 NREPL=2000
