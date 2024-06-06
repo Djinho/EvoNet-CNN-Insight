@@ -1,0 +1,32 @@
+### 1) DIRECTORIES
+
+DIRMSMS="/content/EvoNet-CNN-Insight/model_training/msms.jar"
+DIRDATA="/content/EvoNet-CNN-Insight/model_training/Late_Strong/LS"
+
+### 2) DEMOGRAPHIC MODEL
+
+NREF=10000
+DEMO='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2'
+
+### 3) LOCUS AND SAMPLE SIZE
+
+LEN=80000
+THETA=48
+RHO=32
+NCHROMS=198
+
+### 4) SELECTION
+
+SELPOS=0.5
+FREQ=0.01
+
+# Simulating strong selection scenarios (0 or 300)
+SELRANGE=`seq 0 300 300`
+
+NREPL=1000
+
+# Represents late selection (100kya)
+TIMERANGE=0.1
+
+NBATCH=10
+NTHREADS=4
