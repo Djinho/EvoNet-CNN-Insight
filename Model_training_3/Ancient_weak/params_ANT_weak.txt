@@ -1,7 +1,7 @@
 ### 1) DIRECTORIES
 
 DIRMSMS="/content/EvoNet-CNN-Insight/Model_training_2/msms.jar"
-DIRDATA="/content/EvoNet-CNN-Insight/Model_training_3/Ancient_strong/AS"
+DIRDATA="/content/EvoNet-CNN-Insight/Model_training_3/Ancient_weak/AS"
 
 ### 2) DEMOGRAPHIC MODEL
 
