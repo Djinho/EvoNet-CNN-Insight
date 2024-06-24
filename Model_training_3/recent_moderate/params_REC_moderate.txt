@@ -26,7 +26,7 @@ SELRANGE=`seq 0 200 200`
 
 NREPL=4000
 
-# Represents mid selection (50kya)
+# Represents mid selection (10kya)
 TIMERANGE=0.01
 
 NBATCH=10
