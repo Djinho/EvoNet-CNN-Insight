@@ -1,5 +1,5 @@
 DIRMSMS="/data/home/ha231431/EvoNet-CNN-Insight/Model_training_3/msms.jar"
-DIRDATA="/data/home/ha231431/EvoNet-CNN-Insight/AM"  # Path to data storage
+DIRDATA="/data/home/ha231431/EvoNet-CNN-Insight/AW"  # Path to data storage
 
 ### 2) DEMOGRAPHIC MODEL
 
