@@ -9,7 +9,7 @@
 # module load example_module
 
 # Run the dataset generation commands
-bash generate_datasets.sh params_Ant_moderate.txt
+bash generate_datasets.sh params_ANT_moderate.txt
 bash generate_datasets.sh params_ANT_weak.txt
 bash generate_datasets.sh params_ANT_strong.txt
 bash generate_datasets.sh params_INT_moderate.txt
