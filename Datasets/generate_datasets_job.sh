@@ -10,9 +10,9 @@
 
 # Run the dataset generation commands
 bash generate_datasets.sh params_Ant_moderate.txt
-bash generate_datasets.sh params_Ant_weak.txt
-bash generate_datasets.sh params_Ant_strong.txt
-bash generate_datasets.sh params_INT_moderat.txt
+bash generate_datasets.sh params_ANT_weak.txt
+bash generate_datasets.sh params_ANT_strong.txt
+bash generate_datasets.sh params_INT_moderate.txt
 bash generate_datasets.sh params_INT_strong.txt
 bash generate_datasets.sh params_INT_weak.txt
 bash generate_datasets.sh params_REC_moderate.txt
