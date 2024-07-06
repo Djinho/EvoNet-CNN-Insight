@@ -1,4 +1,4 @@
-DIRMSMS="/data/home/ha231431/EvoNet-CNN-Insight/Model_training_3/msms.jar"
+DIRMSMS="/data/home/ha231431/EvoNet-CNN-Insight/msms.jar"
 DIRDATA="/data/home/ha231431/EvoNet-CNN-Insight/AS"  # Path to data storage
 
 ### 2) DEMOGRAPHIC MODEL
