@@ -1,0 +1,27 @@
+# params_binary.txt
+
+### 1) DIRECTORIES
+DIRMSMS="/content/EvoNet-CNN-Insight/model_training/msms.jar"
+DIRDATA="/content/EvoNet-CNN-Insight/model_training/Binary_Time"
+
+### 2) DEMOGRAPHIC MODEL
+NREF=10000
+DEMO='-eN 0.0875 1 -eN 0.075 0.2 -eN 0 2'
+
+### 3) LOCUS AND SAMPLE SIZE
+LEN=80000
+THETA=48
+RHO=32
+NCHROMS=198
+
+### 4) SELECTION
+SELPOS=0.5
+FREQ=0.01
+# Use a high selection coefficient for strong selection
+SELCOEFF=200  # Example for strong selection, adjust as necessary
+NREPL=1000
+# Define binary time ranges
+RECENT=(0.05 0.025)
+ANCIENT=(0.1 0.075)
+NBATCH=10
+NTHREADS=4
