@@ -1,3 +1,4 @@
+
 ### ------------- utilities --------------------
 
 
@@ -151,50 +152,50 @@ class ImaFile:
         self.VCF_file_name = VCF_file_name
         self.model_name = model_name
         return None
+
     def extract_description(self, file_name, first_line):
-    """
-    Read first line of simulations, extract all metadata and store it in a dictionary
+        """
+        Read first line of simulations, extract all metadata and store it in a dictionary
 
-    Keyword Arguments:
-        file_name (string) -- name of simulation file
-        first_line (string) -- first line of gzipped msms file
-        model_name (string) -- name of demographic model
+        Keyword Arguments:
+            file_name (string) -- name of simulation file
+            first_line (string) -- first line of gzipped msms file
+            model_name (string) -- name of demographic model
 
-    Return:
-        description (string)
-    """
+        Return:
+            description (string)
+        """
 
-    desc = {'name': file_name}
+        desc = {'name':file_name}
 
-    # Extracting parameters
-    desc.update({'Nref': int(extract_msms_parameter(first_line, '-N '))})
-    desc.update({'nr_chroms': int(extract_msms_parameter(first_line, '-N ', 1))})
-    desc.update({'nr_replicates': int(extract_msms_parameter(first_line, '-N ', 2))})
+        # Extracting parameters
+        desc.update({'Nref':int(extract_msms_parameter(first_line, '-N '))})
+        desc.update({'nr_chroms':int(extract_msms_parameter(first_line, '-N ', 1))})
+        desc.update({'nr_replicates':int(extract_msms_parameter(first_line, '-N ', 2))})
 
-    desc.update({'mutation_rate': float(extract_msms_parameter(first_line, '-t '))})
-    desc.update({'recombination_rate': float(extract_msms_parameter(first_line, '-r '))})
-    desc.update({'recombination_rate_nr_sites': int(extract_msms_parameter(first_line, '-r ', 1))})
+        desc.update({'mutation_rate':float(extract_msms_parameter(first_line, '-t '))})
+        desc.update({'recombination_rate':float(extract_msms_parameter(first_line, '-r '))})
+        desc.update({'recombination_rate_nr_sites':int(extract_msms_parameter(first_line, '-r ', 1))})
 
-    desc.update({'selection_position': float(extract_msms_parameter(first_line, '-Sp '))})
-    desc.update({'selection_start_time': float(extract_msms_parameter(first_line, '-SI '))})
-    desc.update({'selection_start_frequency': float(extract_msms_parameter(first_line, '-SI ', 2))})
-
-    desc.update({'selection_coeff_HOMO': int(extract_msms_parameter(first_line, '-SAA '))})
-    desc.update({'selection_coeff_hetero': int(extract_msms_parameter(first_line, '-SAa '))})
-    desc.update({'selection_coeff_homo': int(extract_msms_parameter(first_line, '-Saa '))})
-
-    desc.update({'model': str(self.model_name)})
-
-    # Get the UNIX Time Stamp of when the file was modification
-    desc.update({'modification_stamp': os.stat(file_name).st_mtime})
-
-    # Allow deleted files to be tracked in json folder
-    desc.update({'active': 'active'})
-
-    return desc
-
+        desc.update({'selection_position':float(extract_msms_parameter(first_line, '-Sp '))})
+        desc.update({'selection_start_time':float(extract_msms_parameter(first_line, '-SI '))})
+        desc.update({'selection_start_frequency':float(extract_msms_parameter(first_line, '-SI ', 2))})
     
-    def read_simulations(self, parameter_name='selection_start_time', max_nrepl=None, verbose=0):
+        desc.update({'selection_coeff_HOMO':int(extract_msms_parameter(first_line, '-SAA '))})
+        desc.update({'selection_coeff_hetero':int(extract_msms_parameter(first_line, '-SAa '))})
+        desc.update({'selection_coeff_homo':int(extract_msms_parameter(first_line, '-Saa '))})
+
+        desc.update({'model':str(self.model_name)})
+
+        # Get the UNIX Time Stamp of when the file was modification
+        desc.update({'modification_stamp':os.stat(file_name).st_mtime})
+
+        # Allow deleted files to be tracked in json folder
+        desc.update({'active':'active'})
+
+        return desc
+
+    def read_simulations(self, parameter_name='selection_coeff_hetero', max_nrepl=None, verbose=0):
         """
         Read simulations and store into compressed numpy arrays
 
