@@ -195,7 +195,7 @@ class ImaFile:
 
         return desc
 
-    def read_simulations(self, parameter_name='selection_coeff_hetero', max_nrepl=None, verbose=0):
+   def read_simulations(self, parameter_name='selection_start_time', max_nrepl=None, verbose=0):
         """
         Read simulations and store into compressed numpy arrays
 
@@ -211,24 +211,25 @@ class ImaFile:
         data = []
         positions = []
         description = []
+        binary_labels = []
 
         # Open the directory in which simulation files are stored
         for file_name in os.listdir(self.simulations_folder):
 
-            full_name = self.simulations_folder + '/%s' %(file_name)
+            full_name = os.path.join(self.simulations_folder, file_name)
 
             if verbose > 0:
                 print(full_name, ': ', end='')
 
             # Read lines including the metadata
-            f = gzip.open(full_name, 'rb')
-            file_content = f.read().decode('utf8').split('\n')
+            with gzip.open(full_name, 'rb') as f:
+                file_content = f.read().decode('utf8').split('\n')
 
             # Search the // char inside the file
             starts = ([i for i, e in enumerate(file_content) if e == '//'])
 
             # limit the scan to the first max_nrepl items (if set)
-            if max_nrepl!=None:
+            if max_nrepl is not None:
                 starts = starts[:max_nrepl]
 
             if verbose > 0:
@@ -238,7 +239,8 @@ class ImaFile:
             for idx, pointer in enumerate(starts):
 
                 # Description for each simulation
-                description.append(self.extract_description(full_name, file_content[0]))
+                desc = self.extract_description(full_name, file_content[0])
+                description.append(desc)
 
                 nr_columns = int(file_content[pointer+1].split('segsites: ')[1])
                 haplotypes = np.zeros((self.nr_samples, nr_columns, 1), dtype='uint8')
@@ -249,20 +251,21 @@ class ImaFile:
                 del pos
 
                 for j in range(self.nr_samples):
-
                     hap = list(file_content[pointer + 3 + j])
-
-                    # string processing: if not 0/1 --> convert to 1
-                    hap = ['1' if element!='0' and element!=1 else element for element in hap]
-                    # switch colours, 1s are black and 0s are white
-                    hap = ['255' if element=='1' else element for element in hap]
-                    haplotypes[j,:,0] = hap
+                    hap = ['1' if element != '0' and element != 1 else element for element in hap]
+                    hap = ['255' if element == '1' else element for element in hap]
+                    haplotypes[j, :, 0] = hap
 
                 data.append(haplotypes)
 
-            f.close()
+                # Determine the binary label based on the selection start time
+                selection_time = desc['selection_start_time']
+                if selection_time <= 0.05:  # Threshold value to determine binary class, adjust as necessary
+                    binary_labels.append(0)
+                else:
+                    binary_labels.append(1)
 
-        gene = ImaGene(data=data, positions=positions, description=description, parameter_name=parameter_name)
+        gene = ImaGene(data=data, positions=positions, description=description, targets=binary_labels, parameter_name=parameter_name)
 
         return gene
 
