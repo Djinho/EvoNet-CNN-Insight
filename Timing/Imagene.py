@@ -547,28 +547,37 @@ class ImaGene:
                 print('A numpy array with dimensions', self.data.shape)
         return 0
 
-    def set_classes(self, classes=[], nr_classes=0):
-        """
-        Set classes (or reinitiate)
-        """
-        # Set binary classes explicitly
-        self.classes = np.array([0, 1], dtype='int32')
-        return 0
+    def set_classes(self, classes=[], nr_classes=2):
+    """
+    Set classes (or reinitiate)
+    """
+    # Initialize target array
+    targets = np.zeros(len(self.data), dtype='float32')
+    for i in range(len(self.data)):
+        # Set target from file description
+        targets[i] = self.description[i][self.parameter_name]
+    # Define classes for binary classification
+    self.classes = np.array([0, 1])
+    del targets
+    return 0
 
-    def set_targets(self):
-        """
-        Set targets for binary or categorical classification (not for regression) AFTER running set_classes
-        """
-        # Initialise
-        self.targets = np.zeros(len(self.data), dtype='int32')
-        for i in range(len(self.targets)):
-            # Set binary targets based on selection_start_time
-            start_time = self.description[i]['selection_start_time']
-            if start_time == 0.01:  # Adjust threshold as per your requirement
-                self.targets[i] = 0
-            else:
-                self.targets[i] = 1
-        return 0
+    
+def set_targets(self):
+    """
+    Set targets for binary classification (not for regression) AFTER running set_classes
+    """
+    # Initialize
+    self.targets = np.zeros(len(self.data), dtype='int32')
+    for i in range(len(self.targets)):
+        # Reinitialize
+        start_time = self.description[i][self.parameter_name]
+        # Assign label based on selection start time
+        if start_time < 0.05:
+            self.targets[i] = 0  # Recent selection
+        else:
+            self.targets[i] = 1  # Ancient selection
+    return 0
+
 
 
     def subset(self, index):
