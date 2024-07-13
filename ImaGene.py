@@ -195,7 +195,7 @@ class ImaFile:
 
         return desc
 
-    def read_simulations(self, parameter_name='selection_coeff_hetero', max_nrepl=None, verbose=0):
+    def read_simulations(self, parameter_name='selection_start_time', max_nrepl=None, verbose=0):
         """
         Read simulations and store into compressed numpy arrays
 
