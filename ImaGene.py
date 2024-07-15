@@ -790,6 +790,3 @@ class ImaNet:
             pickle.dump(self, fp)
 
         return 0
-
-
-
