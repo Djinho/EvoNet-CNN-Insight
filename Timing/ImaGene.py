@@ -563,22 +563,16 @@ class ImaGene:
 
     def set_targets(self):
         """
-    Set targets for binary or categorical classification (not for regression) AFTER running set_classes
-    """
-    # initialise
-    self.targets = np.zeros(len(self.data), dtype='int32')
-    for i in range(len(self.targets)):
-        # reinitialise
-        start_time = self.description[i][self.parameter_name]
-        print(f"Sample {i}: start_time = {start_time}")
-        # assign label based on selection start time
-        if start_time == 0.02:
-            self.targets[i] = 0  # Recent selection
-            print(f"Sample {i}: target = 0 (Recent selection)")
-        elif start_time == 0.08:
-            self.targets[i] = 1  # Ancient selection
-            print(f"Sample {i}: target = 1 (Ancient selection)")
-    return 0
+        Set targets for binary or categorical classification (not for regression) AFTER running set_classes
+        """
+        # initialise
+        self.targets = np.zeros(len(self.data), dtype='int32')
+        for i in range(len(self.targets)):
+            # reinitialise
+            self.targets[i] = self.description[i][self.parameter_name]
+            # assign label as closest class
+            self.targets[i] = self.classes[np.argsort(np.abs(self.targets[i] - self.classes))[0]]
+        return 0
 
     def subset(self, index):
         """
