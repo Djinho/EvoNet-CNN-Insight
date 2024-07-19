@@ -42,7 +42,7 @@ SELRANGE=`seq 0 100 100`
 # Number of replicates (simulations) per value of the parameter to be estimated
 NREPL=1000
 
-# Selection time scaled to coalescent units. Here it represents early selection (10kya)
+# Selection time scaled to coalescent units. Here it represents recent selection (10kya)
 TIMERANGE=0.01
 
 # Number of batches for each simulation
