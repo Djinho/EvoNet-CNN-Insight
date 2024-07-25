@@ -1,2 +1,0 @@
-# EvoNet-CNN-Insight
-
