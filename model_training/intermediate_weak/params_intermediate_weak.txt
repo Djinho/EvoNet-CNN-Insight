@@ -23,7 +23,7 @@ FREQ=0.01
 # Simulating weak selection scenarios (0 or 100)
 SELRANGE=`seq 0 100 100`
 
-NREPL=1000
+NREPL=2000
 
 # Represents mid selection (50kya)
 TIMERANGE=0.05
