@@ -23,7 +23,7 @@ FREQ=0.01
 # Simulating moderate selection scenarios (0 or 200)
 SELRANGE=`seq 0 200 200`
 
-NREPL=1000
+NREPL=2000
 
 # Represents late selection (100kya)
 TIMERANGE=0.1
