@@ -106,6 +106,7 @@ To use one of these models in your own environment, follow these steps:
 ## Notes
 - Ensure that you have all the required dependencies installed before running any notebooks.
 - The evolutionary scenarios correspond to different levels of selection pressure and selection start times as outlined in the corresponding publications or project documentation.
+- The report summarising the findings can be found in the CNN_Report.pdf 
 
 ## Contact
 For further information or inquiries, please contact [Djinho] at [Djinho.itshary@outlook].
