@@ -25,6 +25,7 @@ This project explores the efficacy of Convolutional Neural Networks (CNNs) in de
   - **intermediate_weak**
   - **recent_moderate**
   - **recent_weak**
+  - **recent_strong.ipynb**
 
   Each scenario contains the following key notebooks:
   - `Baseline.ipynb`: Use this notebook to train the CNN from scratch using baseline parameters.
