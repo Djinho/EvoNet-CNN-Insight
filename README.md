@@ -2,7 +2,7 @@
 # EvoNet-CNN-Insight Project
 
 ## Overview
-This project explores the efficacy of Convolutional Neural Networks (CNNs) in detecting selection across various evolutionary scenarios, ranging from temporally ancient to nearly neutral evolutionary contexts. The primary goal is to determine how effectively CNNs can identify selection pressures, particularly in challenging scenarios characterized by ancient and weak selection signals.
+This project explores the efficacy of Convolutional Neural Networks (CNNs) in detecting selection across various evolutionary scenarios, ranging from temporally ancient to nearly neutral evolutionary contexts. The primary goal is to determine how effectively CNNs can identify selection pressures, particularly in challenging scenarios characterised by ancient and weak selection signals.
 
 ## Key Findings
 - **Baseline/Low Complexity CNN**: Demonstrated the capability to detect selection in:
@@ -105,7 +105,7 @@ To use one of these models in your own environment, follow these steps:
 
 ## Notes
 - Ensure that you have all the required dependencies installed before running any notebooks.
-- The evolutionary scenarios correspond to different levels of selection pressure and mutation rates as outlined in the corresponding publications or project documentation.
+- The evolutionary scenarios correspond to different levels of selection pressure and selection start times as outlined in the corresponding publications or project documentation.
 
 ## Contact
 For further information or inquiries, please contact [Djinho] at [Djinho.itshary@outlook].
