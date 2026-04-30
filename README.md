@@ -13,7 +13,7 @@ This project explores the efficacy of Convolutional Neural Networks (CNNs) in de
 
 ## Project Structure
 - **Autophagy_related_Genes**: Contains notebooks for testing the trained models (specifically those optimized with Bayesian optimization over 30 trials) against variants in autophagy-related genes. This folder includes testing scripts and plotting utilities.
-- **Optimisation_notebooks**: [Brief description if needed]
+- **Optimisation_notebooks**: 
 - **Selection_Test**: Contains scripts for testing the trained models (30 trials of Bayesian optimization) on known variants under selection, including human pigmentation genes and lactose persistence genes. This folder also includes plotting utilities.
 - **model_training**: This folder contains the main scripts and notebooks for training CNN models under different evolutionary scenarios.
 
